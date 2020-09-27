@@ -5,6 +5,7 @@ using Discord;
 using Discord.WebSocket;
 using Microsoft.Extensions.Logging;
 using ICommand = DiscordBot.BotCommands.ICommand;
+using IPrivateMessageCommand = DiscordBot.BotCommands.IPrivateMessageCommand;
 
 namespace DiscordBot.EntryPoint.CommandExecution
 {
@@ -28,15 +29,17 @@ namespace DiscordBot.EntryPoint.CommandExecution
                 return;
             }
             
-            if (message.Channel is IPrivateChannel)
-            {
-                return;
-            }
+            
             
             foreach (var command in _commands)
             {
                 try
                 {
+					if (message.Channel is IPrivateChannel)
+					{
+						if (!(command is IPrivateMessageCommand) continue;
+					}
+					
                     if (!command.CanExecute(message)) continue;
 
                     await command.Execute(message);
