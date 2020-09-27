@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 using DiscordBot.EntryPoint.CommandExecution;
+using DiscordBot.StaticValues;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -33,7 +34,7 @@ namespace DiscordBot.EntryPoint
                     try
                     {
                         var channel =
-                            _discordClient.GetGuild(685492295386398780).GetChannel(757206506566320128) as
+                            _discordClient.GetGuild(GuildIds.FortuneFavoured).GetChannel(757206506566320128) as
                                 IMessageChannel;
                         channel.SendMessageAsync($"Successful redeploy on Azure {DateTime.Now.ToLongTimeString()}")
                             .GetAwaiter().GetResult();
